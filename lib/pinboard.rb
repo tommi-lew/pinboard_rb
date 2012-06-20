@@ -13,7 +13,7 @@ class Pinboard
 
     path = @calls.join('/')
     @calls = []
-    @params = {}
+
     self.class.get("https://api.pinboard.in/v1/#{path}", :query => @params).inspect
   end
 
