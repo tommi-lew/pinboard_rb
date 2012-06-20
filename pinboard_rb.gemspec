@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors             = ["Tommi Lew"]
   s.email               = 'cs.lew.1111@gmail.com'
   s.files               = ["lib/pinboard.rb"]
-  s.homepage            =     'http://rubygems.org/gems/pinboard_rb'
+  s.homepage            = 'http://github.com/cslew/pinboard_rb'
 
   s.rubyforge_project   = "pinboard_rb"
 
