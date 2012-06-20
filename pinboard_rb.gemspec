@@ -13,4 +13,9 @@ Gem::Specification.new do |s|
 
   s.files               = Dir["{lib}/**/*.rb"]
   s.require_path        = 'lib'
+
+  s.add_development_dependency "rspec"       , "~> 2.10.0"
+  s.add_development_dependency "webmock"     , "~> 1.8.7"
+
+  s.add_runtime_dependency     "httparty"    , "~> 0.8.3"
 end
