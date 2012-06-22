@@ -15,27 +15,27 @@ All the API methods listed in `http://pinboard.in/api` should work.
 Add following to your .rb
 
     require 'pinboard'
-    
+
 Initialize
 
     pinboard = Pinboard.new('username', 'password')
-    
+
 ###Examples
 
 Get all posts (https://api.pinboard.in/v1/posts/get)
 
-    pinboard.posts.get
+    pinboard.posts.req
 
 Get all posts with parameters
 
-    pinboard.posts.get.params({tag: 'tag_name'})
-    
+    pinboard.posts.params({tag: 'tag_name'}).req
+
 Get recent posts (https://api.pinboard.in/v1/posts/recent)
 
-    pinboard.posts.recent
+    pinboard.posts.recent.req
 
 Get recent posts with parameters
 
-    pinboard.posts.recent({count: 1})
+    pinboard.posts.recent.params({count: 1}).req
 
 
