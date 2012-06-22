@@ -10,7 +10,7 @@ This gem is not usable yet. There are a couple of things I've yet to do - error 
 `gem install pinboard_rb` or add to Gemfile `gem 'pinboard_rb'`
 
 ##Usage
-All the API methods listed in `http://pinboard.in/api` should work.
+I'm working towards getting all the API methods listed in `http://pinboard.in/api` to work.
 
 Add following to your .rb
 
