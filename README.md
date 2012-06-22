@@ -32,7 +32,7 @@ Get all posts with parameters
     
 Get recent posts (https://api.pinboard.in/v1/posts/recent)
 
-    pinboard.posts.recent({tag: 'tag_name'})
+    pinboard.posts.recent
 
 Get recent posts with parameters
 
