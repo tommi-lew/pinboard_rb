@@ -14,7 +14,8 @@ class Pinboard
     path = @calls.join('/')
     @calls = []
 
-    self.class.get("https://api.pinboard.in/v1/#{path}", :query => @params).inspect
+    response = self.class.get("https://api.pinboard.in/v1/#{path}", :query => @params)
+    response.parsed_response
   end
 
   def clear
