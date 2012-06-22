@@ -20,6 +20,7 @@ class Pinboard
 
   def clear
     @calls = []
+    return
   end
 
   private
