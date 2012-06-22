@@ -4,7 +4,7 @@ Thin Ruby API Wrapper for Pinboard API V1
 
 ##NOTICE
 
-This gem is not usable yet. There are a couple of things I've yet to do - error handling for invalid credentials, 429 too many requests, 'something is wrong' error.
+This gem is not usable yet. There are a couple of things I've yet to do - error handling for 429 too many requests, 'something is wrong' error.
 
 ##Installation
 `gem install pinboard_rb` or add to Gemfile `gem 'pinboard_rb'`
