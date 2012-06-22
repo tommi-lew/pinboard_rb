@@ -4,7 +4,7 @@ Thin Ruby API Wrapper for Pinboard API V1
 
 ##NOTICE
 
-This gem is not usable yet. There are a couple of things I've yet to do - error handling for invalid credentials, 429 too many requests, 'something is wrong' error. And most importantly, parsing the response.
+This gem is not usable yet. There are a couple of things I've yet to do - error handling for invalid credentials, 429 too many requests, 'something is wrong' error.
 
 ##Installation
 `gem install pinboard_rb` or add to Gemfile `gem 'pinboard_rb'`
@@ -21,6 +21,8 @@ Initialize
     pinboard = Pinboard.new('username', 'password')
 
 ###Examples
+Most requests should return a hash.
+However, if the username and password are invalid, the gem will raise an `InvalidCredentialsError`.
 
 Get all posts (https://api.pinboard.in/v1/posts/get)
 
