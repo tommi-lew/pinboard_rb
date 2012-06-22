@@ -9,12 +9,12 @@ describe 'Pinboard' do
 
   describe 'API Call'do
     it 'should do a HTTP GET to Pinboard without query strings when it has no parameters ' do
-      pb.posts.recent.get
+      pb.posts.recent.req
       WebMock.should have_requested(:get, "https://username:password@api.pinboard.in/v1/posts/recent?")
     end
 
     it 'should do a HTTP GET to Pinboard with query strings when it has parameters' do
-      pb.posts.recent.params({tag: 'pbrb'}).get
+      pb.posts.recent.params({tag: 'pbrb'}).req
       WebMock.should have_requested(:get, "https://username:password@api.pinboard.in/v1/posts/recent?").
         with(:query => {tag: 'pbrb'})
     end

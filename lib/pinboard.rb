@@ -7,7 +7,7 @@ class Pinboard
     self.class.basic_auth username, password
   end
 
-  def get
+  def req
     @params ||= {}
     @params.merge({:format => 'json'})
 
