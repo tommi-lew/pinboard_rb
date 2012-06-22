@@ -37,6 +37,23 @@ describe 'Pinboard' do
         calls_array.size.should == 1
         calls_array[0].should == :a
       end
+
+      it 'should not store a .clear method call into the array' do
+        pb.a.clear
+        calls_array = pb.instance_variable_get(:@calls)
+        calls_array.size.should == 0
+      end
+    end
+  end
+
+  describe 'able to clear the earlier method calls' do
+    it 'should reset array to empty' do
+      pb.a.b
+      calls_array = pb.instance_variable_get(:@calls)
+      calls_array.size.should == 2
+      pb.clear
+      calls_array = pb.instance_variable_get(:@calls)
+      calls_array.should be_empty
     end
   end
 

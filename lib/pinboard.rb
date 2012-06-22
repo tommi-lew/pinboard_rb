@@ -17,10 +17,15 @@ class Pinboard
     self.class.get("https://api.pinboard.in/v1/#{path}", :query => @params).inspect
   end
 
+  def clear
+    @calls = []
+  end
 
   private
   def method_missing(name, *args, &block)
     @calls ||= []
+
+    return self if name == :clear || name == :req
 
     if name != :params
       @calls.push(name)
