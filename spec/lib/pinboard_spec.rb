@@ -3,11 +3,11 @@ require 'spec_helper'
 describe 'Pinboard' do
   let(:pb) { Pinboard.new('username', 'password') }
 
-  before (:each) do
-    stub_request(:any, /api.pinboard.in/)
-  end
-
   describe 'API Call' do
+    before (:each) do
+      stub_request(:any, /api.pinboard.in/)
+    end
+
     it 'should do a HTTP GET to Pinboard without query strings when it has no parameters ' do
       pb.posts.recent.req
       WebMock.should have_requested(:get, "https://username:password@api.pinboard.in/v1/posts/recent?")
@@ -17,6 +17,16 @@ describe 'Pinboard' do
       pb.posts.recent.params({tag: 'pbrb'}).req
       WebMock.should have_requested(:get, "https://username:password@api.pinboard.in/v1/posts/recent?").
         with(:query => {tag: 'pbrb'})
+    end
+  end
+
+  describe 'API Calls with errors' do
+    before (:each) do
+      stub_request(:any, /api.pinboard.in/).to_return(:body => '401 Forbidden')
+    end
+
+    it 'should raise an InvalidCredentialsError' do
+      lambda { pb.posts.recent.req }.should raise_error Pinboard::InvalidCredentialsError
     end
   end
 
