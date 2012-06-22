@@ -39,5 +39,9 @@ Get recent posts (https://api.pinboard.in/v1/posts/recent)
 Get recent posts with parameters
 
     pinboard.posts.recent.params({count: 1}).req
+    
+Reset method calls without doing an actual request.
+
+    pinboard.clear
 
 
