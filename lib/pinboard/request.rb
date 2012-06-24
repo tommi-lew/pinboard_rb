@@ -16,11 +16,12 @@ module Pinboard
       @calls = []
 
       response = self.class.get("https://api.pinboard.in/v1/#{path}", :query => @params)
-      parsed_response = response.parsed_response
 
-      if parsed_response.kind_of?(String) && parsed_response.index('401 Forbidden')
+      if response.response.code == 401
         raise InvalidCredentialsError
       end
+
+      parsed_response = response.parsed_response
 
       parsed_response
     end
