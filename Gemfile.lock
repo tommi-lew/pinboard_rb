@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pinboard_rb (0.0.2)
+    pinboard_rb (0.0.3)
       httparty (~> 0.8.3)
 
 GEM
