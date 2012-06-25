@@ -17,13 +17,10 @@ module Pinboard
 
       response = self.class.get("https://api.pinboard.in/v1/#{path}", :query => @params)
 
-      if response.response.code == 401
-        raise InvalidCredentialsError
-      end
+      error = process_response_code(response.response.code)
+      raise error if error != nil
 
-      parsed_response = response.parsed_response
-
-      parsed_response
+      response.parsed_response
     end
 
     def clear
@@ -44,6 +41,17 @@ module Pinboard
       end
 
       self
+    end
+
+    def process_response_code(response_code)
+      case response_code
+        when '401'
+          InvalidCredentialsError
+        when '429'
+          TooManyRequestsError
+        else
+          nil
+      end
     end
   end
 end

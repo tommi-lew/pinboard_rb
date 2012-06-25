@@ -23,49 +23,45 @@ describe 'Pinboard' do
 
     context 'with errors' do
       describe 'when username/password are invalid' do
-        before do
-          net_res = Net::HTTPResponse.new(1.1, 401, 'Forbidden')
-          party_res = double("party_res")
-          party_res.stub(:response) { net_res }
-          party_res.stub(:headers) { "fuck u"}
-          stub_request(:any, /api.pinboard.in/).to_return(party_res)
-        end
+        before { stub_request(:any, /api.pinboard.in/).to_return(:status => [401, "Forbidden"], :body => "401 Forbidden") }
 
         it 'should raise an InvalidCredentialsError' do
-          lambda { subject.posts.recent.req }.should raise_error Pinboard::InvalidCredentialsError
+          expect { subject.posts.recent.req }.should raise_error Pinboard::InvalidCredentialsError
         end
       end
 
       describe 'when there are too many requests' do
-        before { stub_request(:any, /api.pinboard.in/).to_return(:body => '429 Forbidden') }
+        before { stub_request(:any, /api.pinboard.in/).to_return(:status => [429, "Too Many Requests"], :body => '429 Too Many Requests.  Wait 30 seconds before fetching posts/recent again.') }
 
-        it 'should raise an TooManyRequestError'
-      end
-    end
-
-    describe 'implementation of method missing' do
-      let(:calls) { subject.instance_variable_get(:@calls) }
-
-      it 'should store name of method calls into an array' do
-        subject.a.b.c
-        calls.should be_a_kind_of(Array)
-        calls.should == [:a, :b, :c]
-      end
-
-      context 'when .params method is invoked' do
-        it 'should not store a .params method call into the array' do
-          subject.a
-          expect { subject.params }.to change { calls.size }.by(0)
+        it 'should raise a TooManyRequestsError' do
+          expect { subject.posts.recent.req }.should raise_error Pinboard::TooManyRequestsError
         end
-      end
-    end
-
-    describe 'able to clear the earlier method calls' do
-      it 'should reset array to empty' do
-        subject.a.b
-        expect { subject.clear }.to change{ subject.instance_variable_get(:@calls).size}.from(2).to(0)
       end
     end
   end
 
+  describe 'implementation of method missing' do
+    let(:calls) { subject.instance_variable_get(:@calls) }
+
+    it 'should store name of method calls into an array' do
+      subject.a.b.c
+      calls.should be_a_kind_of(Array)
+      calls.should == [:a, :b, :c]
+    end
+
+    context 'when .params method is invoked' do
+      it 'should not store a .params method call into the array' do
+        subject.a
+        expect { subject.params }.to change { calls.size }.by(0)
+      end
+    end
+  end
+
+
+  describe '.clear' do
+    it 'should reset array to empty' do
+      subject.a.b
+      expect { subject.clear }.to change{ subject.instance_variable_get(:@calls).size}.from(2).to(0)
+    end
+  end
 end
