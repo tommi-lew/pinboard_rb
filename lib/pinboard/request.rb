@@ -14,8 +14,7 @@ module Pinboard
     def req
       raise UnableToRenderURIError if @calls.empty?
 
-      @params ||= { }
-      @params.merge({ :format => 'json' })
+      parse_params
 
       path = @calls.join('/')
       @calls = []
@@ -44,6 +43,11 @@ module Pinboard
       end
 
       self
+    end
+
+    def parse_params
+      @params ||= { }
+      @params.merge({ :format => 'json' })
     end
 
     def process_response_code(response_code)

@@ -48,6 +48,15 @@ describe 'Pinboard' do
     end
   end
 
+  describe '.parse_params' do
+    it "should remove the value from the calls array" do
+      subject.params(format: 'xml')
+      params_hash = subject.send(:parse_params)
+      params_hash[:format].should_not == 'xml'
+      params_hash[:format].should == 'json'
+    end
+  end
+
   describe 'implementation of method missing' do
     let(:calls) { subject.instance_variable_get(:@calls) }
 
