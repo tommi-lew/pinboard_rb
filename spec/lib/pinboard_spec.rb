@@ -40,6 +40,14 @@ describe 'Pinboard' do
     end
   end
 
+  describe '#req' do
+    context 'when calls array is empty' do
+      it 'should raise a UnableToRenderURIError' do
+        expect { subject.req }.should raise_error Pinboard::UnableToRenderURIError
+      end
+    end
+  end
+
   describe 'implementation of method missing' do
     let(:calls) { subject.instance_variable_get(:@calls) }
 

@@ -12,6 +12,8 @@ module Pinboard
     end
 
     def req
+      raise UnableToRenderURIError if @calls.empty?
+
       @params ||= { }
       @params.merge({ :format => 'json' })
 
