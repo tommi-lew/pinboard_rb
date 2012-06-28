@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name                = 'pinboard_rb'
-  s.version             = '0.0.4'
-  s.date                = '2012-06-25'
+  s.version             = '0.0.5'
+  s.date                = '2012-06-28'
   s.summary             = "Pinboard for Ruby"
   s.description         = "A thin wrapper around Pinboard API V1"
   s.authors             = ["Tommi Lew"]
