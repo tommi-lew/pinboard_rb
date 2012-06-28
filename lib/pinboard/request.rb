@@ -4,8 +4,11 @@ module Pinboard
   class Request
     include HTTParty
 
+    CALLS_WHITELIST = %w(posts update add delete get dates recent all suggest tags rename user secret params)
+
     def initialize(username, password)
       self.class.basic_auth username, password
+      @calls = []
     end
 
     def req
@@ -30,9 +33,7 @@ module Pinboard
 
     private
     def method_missing(name, *args, &block)
-      @calls ||= []
-
-      return self if name == :clear || name == :req
+      return self if CALLS_WHITELIST.include?(name.to_s) == false
 
       if name != :params
         @calls.push(name)

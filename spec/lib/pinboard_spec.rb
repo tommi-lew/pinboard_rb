@@ -44,9 +44,14 @@ describe 'Pinboard' do
     let(:calls) { subject.instance_variable_get(:@calls) }
 
     it 'should store name of method calls into an array' do
-      subject.a.b.c
+      subject.posts.recent.delete
       calls.should be_a_kind_of(Array)
-      calls.should == [:a, :b, :c]
+      calls.should == [:posts, :recent, :delete]
+    end
+
+    it 'should only store name of method calls from the white list' do
+      expect { subject.a }.to change { calls.size }.by(0)
+      expect { subject.posts.update }.to change { calls.size }.by(2)
     end
 
     context 'when .params method is invoked' do
@@ -57,10 +62,9 @@ describe 'Pinboard' do
     end
   end
 
-
   describe '.clear' do
     it 'should reset array to empty' do
-      subject.a.b
+      subject.posts.recent
       expect { subject.clear }.to change{ subject.instance_variable_get(:@calls).size}.from(2).to(0)
     end
   end
