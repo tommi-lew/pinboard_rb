@@ -2,6 +2,8 @@ Pinboard Ruby (pinboard-rb) [![Build Status](https://secure.travis-ci.org/cslew/
 ===========
 Thin Ruby API Wrapper for Pinboard API V1
 
+[Changelog](http://github.com/cslew/pinboard_rb/wiki/Changelog)
+
 ##Installation
 `gem install pinboard_rb` or add to Gemfile `gem 'pinboard_rb'`
 
